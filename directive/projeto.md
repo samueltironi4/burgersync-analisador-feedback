@@ -1,6 +1,6 @@
 # 📘 SOP: Avaliador de Feedback Hamburgueria
 
-**Status:** Em Desenvolvimento | **Versão:** 1.0
+**Status:** Concluído & Validado | **Versão:** 1.1
 
 ## 1. Objetivo Principal
 
@@ -97,3 +97,9 @@ Desenvolver um sistema web completo para coletar, analisar e gerenciar avaliaç�
 3. **Resiliência e Integridade no Disparo de Alertas (SMTP):**
    - O disparo de e-mails conta com fallback automático para gravação estruturada em `.tmp/alerts.log` quando credenciais SMTP não forem informadas ou em quedas de rede externa.
    - Consolidação rigorosa dos dados do cliente (`nome`, `contato`, `pedido_id`, `comentario`) antes do acionamento do serviço de alerta, garantindo que nenhum e-mail seja despachado com dados anônimos ou em branco quando fornecidos pelo cliente.
+
+4. **Transição de Modelos e Endpoints da API Gemini:**
+   - Detecção em tempo de execução de que modelos anteriores (`gemini-2.5-flash`, `gemini-1.5-flash`) foram substituídos por `gemini-3.6-flash`, que oferece tempos de resposta submétricos e suporte nativo a JSON com `responseMimeType: "application/json"`.
+
+5. **Controle de Versão e Publicação Automatizada:**
+   - Criação e push automatizados para repositório GitHub via API REST (`GITHUB_PERSONAL_TOKEN`) com exclusão estrita de segredos (`.env` no `.gitignore`).
