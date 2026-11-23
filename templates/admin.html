@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BurgerSync Gestão | Painel Administrativo de Feedbacks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="admin-body">
+
+  <!-- Header Administrativo -->
+  <header class="admin-header">
+    <div class="admin-container header-flex">
+      <div class="brand">
+        <span class="brand-icon">🍔</span>
+        <div>
+          <h1 class="brand-title">BurgerSync <span class="badge-role">ADMIN</span></h1>
+          <span class="brand-sub">Ourinhos &bull; Monitoramento de Qualidade &amp; Crises</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="refreshBtn" class="btn-tool" title="Recarregar Dados">🔄 Atualizar</button>
+        <button id="exportBtn" class="btn-tool" title="Exportar para JSON">📥 Exportar JSON</button>
+        <a href="/" class="btn-tool btn-tool-accent" target="_blank">↗ Página de Feedback</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner de Alerta Crítico (Exibido dinamicamente se houver pendências críticas) -->
+  <div id="crisisBanner" class="crisis-alert-banner" style="display: none;">
+    <div class="admin-container banner-content">
+      <span class="banner-icon">🚨</span>
+      <div class="banner-text">
+        <strong id="crisisBannerTitle">ATENÇÃO: Feedbacks Críticos Pendentes de Atendimento!</strong>
+        <p id="crisisBannerDesc">Existem clientes com reclamações graves que demandam contato imediato da gerência.</p>
+      </div>
+      <button id="filterCriticalPendingBtn" class="btn-banner-action">Ver Casos Críticos</button>
+    </div>
+  </div>
+
+  <main class="admin-container admin-main">
+
+    <!-- Seção de KPIs (Contadores Gerenciais) -->
+    <section class="kpi-grid">
+      <div class="kpi-card" data-metric="total">
+        <div class="kpi-icon">📊</div>
+        <div class="kpi-info">
+          <span class="kpi-label">Total de Avaliações</span>
+          <span id="kpiTotal" class="kpi-value">0</span>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-positive" data-metric="positivos">
+        <div class="kpi-icon">😊</div>
+        <div class="kpi-info">
+          <span class="kpi-label">Positivos</span>
+          <span id="kpiPositivos" class="kpi-value">0</span>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-neutral" data-metric="neutros">
+        <div class="kpi-icon">😐</div>
+        <div class="kpi-info">
+          <span class="kpi-label">Neutros</span>
+          <span id="kpiNeutros" class="kpi-value">0</span>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-critical" data-metric="criticos">
+        <div class="kpi-icon">🚨</div>
+        <div class="kpi-info">
+          <span class="kpi-label">Críticos (Alertas)</span>
+          <span id="kpiCriticos" class="kpi-value">0</span>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-pending" data-metric="pendentes">
+        <div class="kpi-icon">⏳</div>
+        <div class="kpi-info">
+          <span class="kpi-label">Casos Pendentes</span>
+          <span id="kpiPendentes" class="kpi-value">0</span>
+        </div>
+      </div>
+
+      <div class="kpi-card" data-metric="rating">
+        <div class="kpi-icon">⭐</div>
+        <div class="kpi-info">
+          <span class="kpi-label">Nota Média</span>
+          <span id="kpiRating" class="kpi-value">5.0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Barra de Controles, Filtros e Busca -->
+    <section class="controls-panel">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Buscar por cliente, pedido, resumo ou palavra-chave...">
+      </div>
+
+      <div class="filters-row">
+        <div class="filter-group">
+          <label for="filterSentimento">Sentimento:</label>
+          <select id="filterSentimento">
+            <option value="todos">Todos os Sentimentos</option>
+            <option value="Positivo">🟢 Positivos</option>
+            <option value="Neutro">🟡 Neutros</option>
+            <option value="Crítico">🔴 Críticos</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filterStatus">Status:</label>
+          <select id="filterStatus">
+            <option value="todos">Todos os Status</option>
+            <option value="Pendente">⏳ Pendente</option>
+            <option value="Tratado">✅ Tratado / Resolvido</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filterTag">Tópico / Tag:</label>
+          <select id="filterTag">
+            <option value="todos">Todas as Tags</option>
+            <option value="Sabor">Sabor</option>
+            <option value="Entrega">Entrega</option>
+            <option value="Atendimento">Atendimento</option>
+            <option value="Temperatura">Temperatura</option>
+            <option value="Embalagem">Embalagem</option>
+            <option value="Preço">Preço</option>
+            <option value="Higiene">Higiene</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filterSort">Ordenar por:</label>
+          <select id="filterSort">
+            <option value="date_desc">📅 Mais Recentes</option>
+            <option value="date_asc">📅 Mais Antigos</option>
+            <option value="urgency">⚠️ Urgência (Críticos Primeiro)</option>
+            <option value="rating_desc">⭐ Maior Nota</option>
+            <option value="rating_asc">⭐ Menor Nota</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabela / Lista de Feedbacks -->
+    <section class="table-container">
+      <div class="table-header-meta">
+        <h3>Lista de Avaliações Registradas (<span id="resultsCount">0</span>)</h3>
+        <span class="table-tip">💡 Marque o checkbox para sinalizar avaliações como tratadas pela gerência.</span>
+      </div>
+
+      <div class="responsive-table-wrapper">
+        <table class="styled-table" id="feedbacksTable">
+          <thead>
+            <tr>
+              <th style="width: 70px;">Status</th>
+              <th>Data/Hora</th>
+              <th>Pedido</th>
+              <th>Cliente</th>
+              <th>Nota</th>
+              <th>Sentimento</th>
+              <th>Tópicos (Tags)</th>
+              <th>Resumo IA &amp; Comentário</th>
+              <th style="width: 110px;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="feedbacksBody">
+            <!-- Linhas inseridas via admin.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="emptyState" class="empty-state" style="display: none;">
+        <span class="empty-icon">📭</span>
+        <h4>Nenhuma avaliação encontrada</h4>
+        <p>Tente ajustar os filtros de busca ou aguarde novas avaliações dos clientes.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de Detalhes do Feedback -->
+  <div id="detailModal" class="modal-backdrop" style="display: none;">
+    <div class="modal-card detail-modal-card">
+      <div class="modal-header-flex">
+        <h3>Detalhes da Avaliação</h3>
+        <button id="closeDetailModalBtn" class="btn-close-modal">&times;</button>
+      </div>
+      <div id="detailModalContent" class="detail-content"></div>
+    </div>
+  </div>
+
+  <footer class="admin-footer">
+    <div class="admin-container">
+      <p>BurgerSync Ourinhos &bull; Sistema Operacional de Qualidade &bull; Versão 1.0 (Python &amp; Gemini)</p>
+    </div>
+  </footer>
+
+  <script src="/static/js/admin.js"></script>
+</body>
+</html>

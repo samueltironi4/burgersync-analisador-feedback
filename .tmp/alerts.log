@@ -1,0 +1,24 @@
+================================================================================
+[ALERTA DE CRISE - BURGERSYNC OURINHOS]
+Data/Hora: 2026-11-23 15:56:50
+ID Registro: test-alert-123
+Pedido: #TEST-99 | Nota: 1/5
+Cliente: Marcos Testador | Contato: (14) 99999-0000
+Tags Detectadas: [Sabor, Higiene]
+Resumo da IA: Problema grave de higiene e cozimento.
+Comentário do Cliente:
+"Carne crua e cabelo no lanche. Quero meu dinheiro de volta!"
+================================================================================
+
+================================================================================
+[ALERTA DE CRISE - BURGERSYNC OURINHOS]
+Data/Hora: 2026-11-23 15:57:02
+ID Registro: N/A
+Pedido: #3099 | Nota: 1/5
+Cliente: Roberto Alencar | Contato: (14) 98765-4321
+Tags Detectadas: [Temperatura, Entrega, Sabor, Embalagem, Atendimento]
+Resumo da IA: Feedback negativo demandando atenção imediata.
+Comentário do Cliente:
+"Horrível! O motoboy demorou 1h40, foi super grosseiro e o lanche estava completamente frio e amassado!"
+================================================================================
+

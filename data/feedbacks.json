@@ -1,0 +1,107 @@
+[
+  {
+    "nome": "Roberto Alencar",
+    "contato": "(14) 98765-4321",
+    "pedido_id": "3099",
+    "nota": 1,
+    "comentario": "Horrível! O motoboy demorou 1h40, foi super grosseiro e o lanche estava completamente frio e amassado!",
+    "sentimento": "Crítico",
+    "tags": [
+      "Temperatura",
+      "Entrega",
+      "Sabor",
+      "Embalagem",
+      "Atendimento"
+    ],
+    "resumo": "Feedback negativo demandando atenção imediata.",
+    "urgencia": "Alta",
+    "origem_analise": "heuristic_fallback",
+    "alerta_disparado": true,
+    "status": "Tratado",
+    "alerta_info": {
+      "success": true,
+      "method": "log_fallback",
+      "recipient": "gerencia@burgersync.com.br"
+    },
+    "id": "801cd372-e198-4a77-b713-fcbb9c2855f6",
+    "timestamp": "2026-11-23 15:57:02",
+    "updated_at": "2026-11-23 15:57:02"
+  },
+  {
+    "nome": "Juliana Santos",
+    "contato": "juliana@email.com",
+    "pedido_id": "2050",
+    "nota": 5,
+    "comentario": "Parabéns BurgerSync! Hambúrguer artesanal divino e atendimento impecável!",
+    "sentimento": "Positivo",
+    "tags": [
+      "Atendimento"
+    ],
+    "resumo": "Cliente elogiou a experiência com a hamburgueria.",
+    "urgencia": "Baixa",
+    "origem_analise": "heuristic_fallback",
+    "alerta_disparado": false,
+    "status": "Pendente",
+    "id": "59ab9d3a-4524-4a1a-bee5-942f818a989b",
+    "timestamp": "2026-11-23 15:56:56"
+  },
+  {
+    "id": "seed-001",
+    "timestamp": "2026-11-23 12:15:30",
+    "nome": "Lucas Martins",
+    "contato": "(14) 99712-3456",
+    "pedido_id": "1041",
+    "nota": 5,
+    "comentario": "O BurgerSync Bacon Artesanal é o melhor de Ourinhos! Carne no ponto certo, queijo cheddar derretido e maionese defumada sensacional. Entrega chegou em 25 minutos super quente.",
+    "sentimento": "Positivo",
+    "tags": [
+      "Sabor",
+      "Entrega",
+      "Temperatura"
+    ],
+    "resumo": "Cliente muito satisfeito com o ponto da carne, sabor do bacon e rapidez da entrega.",
+    "urgencia": "Baixa",
+    "origem_analise": "gemini-2.5-flash",
+    "alerta_disparado": false,
+    "status": "Tratado"
+  },
+  {
+    "id": "seed-002",
+    "timestamp": "2026-11-23 13:40:12",
+    "nome": "Camila Oliveira",
+    "contato": "camila.ourinhos@gmail.com",
+    "pedido_id": "1055",
+    "nota": 1,
+    "comentario": "O pedido atrasou mais de 1 hora e 20 minutos! Quando o motoboy chegou a batata estava murcha e o lanche completamente gelado. Tentei ligar e ninguém atendeu.",
+    "sentimento": "Crítico",
+    "tags": [
+      "Entrega",
+      "Temperatura",
+      "Atendimento"
+    ],
+    "resumo": "Atraso severo de 1h20, produto gelado e falta de suporte telefônico.",
+    "urgencia": "Alta",
+    "origem_analise": "gemini-2.5-flash",
+    "alerta_disparado": true,
+    "status": "Pendente"
+  },
+  {
+    "id": "seed-003",
+    "timestamp": "2026-11-23 14:05:44",
+    "nome": "Rodrigo Souza",
+    "contato": "(14) 99888-2121",
+    "pedido_id": "1062",
+    "nota": 3,
+    "comentario": "O hambúrguer é bom e tem bom tamanho, mas achei um pouco salgado demais o molho barbecue. Pão bem macio. Entrega no prazo prometido.",
+    "sentimento": "Neutro",
+    "tags": [
+      "Sabor",
+      "Entrega"
+    ],
+    "resumo": "Avaliação moderada elogiando o pão e prazo, com ressalva sobre excesso de sal no molho.",
+    "urgencia": "Média",
+    "origem_analise": "gemini-2.5-flash",
+    "alerta_disparado": false,
+    "status": "Tratado"
+  }
+]
